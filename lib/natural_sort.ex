@@ -73,10 +73,10 @@ defmodule NaturalSort do
   end
 
   @doc """
-  Sorts a list of strings. This works by leveraging Elixir's
-  `Enum.sort_by/3` function, which takes as the second argument
-  a mapping function. Each string is converted into a list
-  of strings and integers. Once in this form, applying the
+  Sorts a list of strings using mapper. This works by leveraging
+  Elixir's `Enum.sort_by/3` function, which takes as the second
+  argument a mapping function. Each string is converted into a
+  list of strings and integers. Once in this form, applying the
   sort function results in a correctly sorted list.
 
   ## Options
