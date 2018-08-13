@@ -72,6 +72,41 @@ defmodule NaturalSort do
                  sort_direction(direction))
   end
 
+  @doc """
+  Sorts a list of strings. This works by leveraging Elixir's
+  `Enum.sort_by/3` function, which takes as the second argument
+  a mapping function. Each string is converted into a list
+  of strings and integers. Once in this form, applying the
+  sort function results in a correctly sorted list.
+
+  ## Options
+
+  There are currently two available options (passed as a
+  keyword list), `:direction` and `case_sensitive`.
+
+  * `:direction` may have a value of `:asc` or `:desc`, and
+    defaults to `:asc`.
+  * `:case_sensitive` may be `true` or `false`, and defaults
+    to `false`.
+
+
+  ## Examples
+
+      iex> NaturalSort.sort_by([%{a: 2}, %{a: 1}], &Map.get(&1, :a))
+      [%{a: 1}, %{a: 2}]
+
+  """
+  def sort_by([], mapper), do: []
+  def sort_by(list, mapper, options \\ []) do
+    direction       = Keyword.get(options, :direction, :asc)
+    case_sensitive? = Keyword.get(options, :case_sensitive, false)
+
+    Enum.sort_by(list,
+                 fn x -> format_item(mapper.(x), case_sensitive?) end,
+                 sort_direction(direction))
+  end
+
+
   ##################################################
   # String -> List formatter
 

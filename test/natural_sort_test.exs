@@ -1,6 +1,8 @@
 defmodule NaturalSortTest do
   use ExUnit.Case
 
+  doctest NaturalSort
+
   test "should return an empty list if handed an empty list" do
     assert NaturalSort.sort([]) == []
   end
